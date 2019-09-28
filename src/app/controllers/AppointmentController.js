@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { startOfHour, parseISO, isBefore, format, subHours } from "date-fns";
+import { startOfHour, parseISO, isBefore, format } from "date-fns";
 import pt from "date-fns/locale/pt";
 
 import Appointment from "../models/Appointment";
@@ -7,17 +7,23 @@ import File from "../models/File";
 import User from "../models/User";
 import Notification from "../schemas/Notification";
 
+<<<<<<< HEAD
 import Queue from "../../lib/Queue";
 import CancellationMail from "../jobs/CancellationMail";
 
+=======
+>>>>>>> parent of 305a491... Appointment function delete has been created and notification update too, the feature who send emails for each canceled appointment has start to create, express handlebars and nodemailer-hbs dependency has added and already to keep configuring config/mail his directory lib/Mail
 class AppointmentController {
   async index(req, res) {
     const { page = 1 } = req.query;
     const appointments = await Appointment.findAll({
-      where: { user_id: req.userId, canceled_at: null },
-      order: ["date"],
+      where: {
+        user_id: req.userId,
+        canceled_at: null
+      },
       attributes: ["id", "date"],
       limit: 20,
+      order: ["date"],
       offset: (page - 1) * 20,
       include: [
         {
@@ -122,6 +128,7 @@ class AppointmentController {
 
     return res.json(appointment);
   }
+<<<<<<< HEAD
 
   async delete(req, res) {
     const appointment = await Appointment.findByPk(req.params.id, {
@@ -161,6 +168,8 @@ class AppointmentController {
 
     return res.json(appointment);
   }
+=======
+>>>>>>> parent of 305a491... Appointment function delete has been created and notification update too, the feature who send emails for each canceled appointment has start to create, express handlebars and nodemailer-hbs dependency has added and already to keep configuring config/mail his directory lib/Mail
 }
 
 export default new AppointmentController();
